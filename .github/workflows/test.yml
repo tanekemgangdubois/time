@@ -1,7 +1,7 @@
 name: "Close stale issues fdfdf"
 on:
   schedule:
-  - cron: "2 * * * *"
+  - cron: "* * * * *"
 
 jobs:
   stale:
