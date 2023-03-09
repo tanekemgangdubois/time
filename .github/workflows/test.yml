@@ -1,14 +1,14 @@
-name: "Close stale issues fdfdf"
+name: Trigger Site Rebuild on a CRON Schedule
+
 on:
   schedule:
-  - cron: "* * * * *"
-
+    # Runs "at minute 55 past every hour" (see https://crontab.guru)
+    - cron: '*/2 * * * *'
 jobs:
-  stale:
+  build:
+    name: Trigger Site Rebuild
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/stale@v1.1.0
-      with:
-        repo-token: ${{ secrets.TOKEN }}
-        stale-issue-message: 'Message to comment on stale issues. If none provided, will not mark issues stale'
-        stale-pr-message: 'Message to comment on stale PRs. If none provided, will not mark PRs stale'
+      - name: cURL request
+        # Hit the webhook endpoint to rebuild  from the "main" branch
+        run: curl -X POST -d {} https://<webhook-endpoint-url>
